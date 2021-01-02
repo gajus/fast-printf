@@ -1,7 +1,7 @@
-export const sprintf = (subject, ...args) => {
+export const sprintf = (subject: string, ...args: any[]): string => {
   let index = -1;
 
-  return subject.replaceAll(/(%c)/g, (match, parameter, offset) => {
+  return subject.replaceAll(/(%c)/g, (match) => {
     index++;
 
     if (match === '%c') {
