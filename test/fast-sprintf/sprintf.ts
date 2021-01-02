@@ -55,3 +55,7 @@ test('interpolates %u', (t) => {
 test('interpolates %x', (t) => {
   t.is(sprintf('%x', 255), 'ff');
 });
+
+test('%% prints %', (t) => {
+  t.is(sprintf('%%'), '%');
+});
