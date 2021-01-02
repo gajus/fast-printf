@@ -5,7 +5,7 @@ import {
 export const sprintf = (subject: string, ...args: any[]): string => {
   let index = -1;
 
-  return subject.replaceAll(/(%[c-e])/g, (match) => {
+  return subject.replaceAll(/(%[c-f])/g, (match) => {
     index++;
 
     const boundValue = args[index];
@@ -25,6 +25,8 @@ export const sprintf = (subject: string, ...args: any[]): string => {
           notation: 'exponential',
         },
       );
+    } else if (match === '%f') {
+      return boundValue;
     } else {
       throw new Error('Unknown format specifier.');
     }

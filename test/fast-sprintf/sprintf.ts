@@ -29,3 +29,7 @@ test('interpolates %d', (t) => {
 test('interpolates %e', (t) => {
   t.is(sprintf('%e', 52.8), '5.28e+1');
 });
+
+test('interpolates %f', (t) => {
+  t.is(sprintf('%f', 52.8), '52.8');
+});
