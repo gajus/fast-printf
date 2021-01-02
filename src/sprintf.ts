@@ -5,7 +5,7 @@ import {
 export const sprintf = (subject: string, ...args: any[]): string => {
   let index = -1;
 
-  return subject.replaceAll(/(%[c-f])/g, (match) => {
+  return subject.replaceAll(/(%[c-fo])/g, (match) => {
     index++;
 
     const boundValue = args[index];
@@ -29,6 +29,8 @@ export const sprintf = (subject: string, ...args: any[]): string => {
       return boundValue;
     } else if (match === '%i') {
       return boundValue;
+    } else if (match === '%o') {
+      return (Number.parseInt(boundValue, 10) >>> 0).toString(8);
     } else {
       throw new Error('Unknown format specifier.');
     }

@@ -37,3 +37,7 @@ test('interpolates %f', (t) => {
 test('interpolates %i', (t) => {
   t.is(sprintf('%f', 123), '123');
 });
+
+test('interpolates %o', (t) => {
+  t.is(sprintf('%o', 8), '10');
+});
