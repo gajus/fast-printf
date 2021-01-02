@@ -60,6 +60,14 @@ test('%% prints %', (t) => {
   t.is(sprintf('%%'), '%');
 });
 
+test('%% does not advance value cursor', (t) => {
+  t.is(sprintf('%% %s', 'foo'), '% foo');
+});
+
 test('\\% prints %', (t) => {
   t.is(sprintf('\\%'), '%');
+});
+
+test('\\% does not advance value cursor', (t) => {
+  t.is(sprintf('\\% %s', 'foo'), '% foo');
 });
