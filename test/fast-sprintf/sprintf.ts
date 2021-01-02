@@ -21,3 +21,7 @@ test('throws if %c is not a single character', (t) => {
     message: '%c must be bound to a single character',
   });
 });
+
+test('interpolates %d', (t) => {
+  t.is(sprintf('%d', 123), '123');
+});
