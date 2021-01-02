@@ -27,6 +27,8 @@ export const sprintf = (subject: string, ...args: any[]): string => {
       );
     } else if (match === '%f') {
       return boundValue;
+    } else if (match === '%i') {
+      return boundValue;
     } else {
       throw new Error('Unknown format specifier.');
     }
