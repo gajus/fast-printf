@@ -25,3 +25,7 @@ test('throws if %c is not a single character', (t) => {
 test('interpolates %d', (t) => {
   t.is(sprintf('%d', 123), '123');
 });
+
+test('interpolates %e', (t) => {
+  t.is(sprintf('%e', 52.8), '5.28e+1');
+});
