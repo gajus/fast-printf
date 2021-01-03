@@ -4,9 +4,9 @@
 
 |**implementation**|**without_placeholders**|**with_string_placeholder**|**with_many_string_placeholders**|
 |-|-|-|-|
-|[`sprintf`](https://github.com/alexei/sprintf.js)|31,127,641|4,283,540|1,433,536|
-|[`printf`](https://github.com/adaltas/node-printf)|669,939|416,429|283,788|
-|[`fast-printf`](https://github.com/gajus/fast-printf)|75,688,380|13,013,351|5,162,244|
+|[`sprintf`](https://github.com/alexei/sprintf.js)|31,772,029|4,154,748|637,229|
+|[`printf`](https://github.com/adaltas/node-printf)|651,970|373,615|160,795|
+|[`fast-printf`](https://github.com/gajus/fast-printf)|78,068,540|11,820,632|2,552,386|
 
 Results show operations per second (greater is better).
 
