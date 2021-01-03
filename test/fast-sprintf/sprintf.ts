@@ -59,6 +59,11 @@ test('interpolates %f', (t) => {
   t.is(sprintf('%f', 52.8), '52.8');
 });
 
+test('interpolates %.1f', (t) => {
+  t.is(sprintf('%.1f', 1.234_5), '1.2');
+  t.is(sprintf('%.1f', 1.25), '1.3');
+});
+
 test('interpolates %i', (t) => {
   t.is(sprintf('%f', 123), '123');
 });

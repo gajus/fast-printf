@@ -15,7 +15,7 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
 
     const conversion = namedGroups.conversion;
     const flag = namedGroups.flag || null;
-    const precision = namedGroups.precision ? Number.parseInt(namedGroups.precision, 10) : null;
+    const precision = namedGroups.precision ? Number.parseInt(namedGroups.precision.slice(1), 10) : null;
     const width = namedGroups.width ? Number.parseInt(namedGroups.width, 10) : null;
 
     index++;
@@ -54,6 +54,16 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
         },
       );
     } else if (conversion === 'f') {
+      if (precision !== null) {
+        boundValue = formatNumber(
+          boundValue,
+          {
+            notation: 'fixed',
+            precision,
+          },
+        );
+      }
+
       return boundValue;
     } else if (conversion === 'i') {
       return boundValue;
