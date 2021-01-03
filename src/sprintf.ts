@@ -5,7 +5,8 @@ import {
 export const sprintf = (subject: string, ...boundValues: any[]): string => {
   let index = -1;
 
-  return subject.replaceAll(/(?:%(?<flag>[+0-])?(?<width>\d+)?(?<precision>\.\d+)?(?<conversion>[%c-fosux]))|(\\%)/g, (match, ...args) => {
+  // eslint-disable-next-line complexity
+  return subject.replaceAll(/(?:%(?<flag>([+0-]|-\+))?(?<width>\d+)?(?<precision>\.\d+)?(?<conversion>[%c-fosux]))|(\\%)/g, (match, ...args) => {
     if (match === '\\%' || match === '%%') {
       return '%';
     }
@@ -33,6 +34,8 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
       if (width !== null) {
         if (flag === '-') {
           boundValue = boundValue.padEnd(width, ' ');
+        } else if (flag === '-+') {
+          boundValue = ('+' + boundValue).padEnd(width, ' ');
         } else if (flag === '+') {
           boundValue = ('+' + boundValue).padStart(width, ' ');
         } else if (flag === '0') {
