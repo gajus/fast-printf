@@ -36,6 +36,11 @@ test('interpolates %-3d', (t) => {
   t.is(sprintf('%-3d', 1_234), '1234');
 });
 
+test('interpolates %03d', (t) => {
+  t.is(sprintf('%03d', 1), '001');
+  t.is(sprintf('%03d', 1_234), '1234');
+});
+
 test('interpolates %e', (t) => {
   t.is(sprintf('%e', 52.8), '5.28e+1');
 });

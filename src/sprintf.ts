@@ -5,7 +5,7 @@ import {
 export const sprintf = (subject: string, ...boundValues: any[]): string => {
   let index = -1;
 
-  return subject.replaceAll(/(?:%(?<flag>[+-])?(?<width>\d+)?(?<precision>\.\d+)?(?<conversion>[%c-fosux]))|(\\%)/g, (match, ...args) => {
+  return subject.replaceAll(/(?:%(?<flag>[+0-])?(?<width>\d+)?(?<precision>\.\d+)?(?<conversion>[%c-fosux]))|(\\%)/g, (match, ...args) => {
     if (match === '\\%' || match === '%%') {
       return '%';
     }
@@ -33,6 +33,8 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
       if (width !== null) {
         if (flag === '-') {
           boundValue = boundValue.padEnd(width, ' ');
+        } else if (flag === '0') {
+          boundValue = boundValue.padStart(width, '0');
         } else {
           boundValue = boundValue.padStart(width, ' ');
         }
