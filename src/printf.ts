@@ -5,6 +5,7 @@ import {
   tokenize,
 } from './tokenize';
 import {
+  Token,
   Flag,
 } from './types';
 
@@ -22,8 +23,14 @@ const padValue = (value: string, width: number, flag: Flag | null): string => {
   }
 };
 
-export const sprintf = (subject: string, ...boundValues: string[] | number[]): string => {
-  const tokens = tokenize(subject);
+const cache: Record<string, Token[]> = {};
+
+export const printf = (subject: string, ...boundValues: string[] | number[]): string => {
+  let tokens = cache[subject];
+
+  if (!tokens) {
+    tokens = cache[subject] = tokenize(subject);
+  }
 
   let index = -1;
   let result = '';

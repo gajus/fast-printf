@@ -9,7 +9,7 @@
       "ts"
     ],
     "files": [
-      "test/fast-sprintf/**/*"
+      "test/fast-printf/**/*"
     ],
     "require": [
       "ts-node/register/transpile-only"
@@ -18,7 +18,7 @@
   "dependencies": {
     "mathjs": "^8.1.1"
   },
-  "description": "Fast sprintf implementation for Node.js and browser.",
+  "description": "Fast and spec-compliant printf implementation for Node.js and browser.",
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/mathjs": "^6.0.9",
@@ -43,14 +43,15 @@
     }
   },
   "keywords": [
+    "printf",
     "sprintf"
   ],
   "license": "BSD-3-Clause",
-  "main": "./dist/sprintf.js",
-  "name": "fast-sprintf",
+  "main": "./dist/printf.js",
+  "name": "fast-printf",
   "repository": {
     "type": "git",
-    "url": "git@github.com:gajus/fast-sprintf.git"
+    "url": "git@github.com:gajus/fast-printf.git"
   },
   "scripts": {
     "benchmark": "ROARR_LOG=true ts-node --transpile-only test/benchmark.ts",
@@ -59,6 +60,6 @@
     "lint": "eslint ./src ./test && tsc --noEmit",
     "test": "NODE_ENV=test ava --serial --verbose"
   },
-  "typings": "./dist/sprintf.d.ts",
+  "typings": "./dist/printf.d.ts",
   "version": "1.0.0"
 }
