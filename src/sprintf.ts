@@ -38,6 +38,10 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
 
     let boundValue = boundValues[index];
 
+    if (boundValue === undefined) {
+      return match;
+    }
+
     if (conversion === 'c') {
       if (boundValue.length !== 1) {
         throw new Error('%c must be bound to a single character');

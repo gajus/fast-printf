@@ -154,3 +154,7 @@ test('\\% prints %', (t) => {
 test('\\% does not advance value cursor', (t) => {
   t.is(sprintf('\\% %s', 'foo'), '% foo');
 });
+
+test('does not interpolate unbound placeholders', (t) => {
+  t.is(sprintf('%s %s %s %s', 'foo'), 'foo %s %s %s');
+});
