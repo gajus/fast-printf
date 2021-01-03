@@ -13,7 +13,7 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
     const namedGroups = args[args.length - 1];
 
     const conversion = namedGroups.conversion;
-    const flag = namedGroups.flag;
+    const flag = namedGroups.flag || null;
     const precision = namedGroups.precision ? Number.parseInt(namedGroups.precision, 10) : null;
     const width = namedGroups.width ? Number.parseInt(namedGroups.width, 10) : null;
 
@@ -31,7 +31,11 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
       boundValue = String(boundValue);
 
       if (width !== null) {
-        boundValue = boundValue.padStart(width, ' ');
+        if (flag === '-') {
+          boundValue = boundValue.padEnd(width, ' ');
+        } else {
+          boundValue = boundValue.padStart(width, ' ');
+        }
       }
 
       return boundValue;
