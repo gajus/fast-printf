@@ -1,4 +1,7 @@
 {
-  "extends": "@istanbuljs/nyc-config-typescript",
-  "all": true
+  "all": true,
+  "exclude": [
+    "benchmark/**/*.js"
+  ],
+  "extends": "@istanbuljs/nyc-config-typescript"
 }
