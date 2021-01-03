@@ -55,6 +55,10 @@ test('interpolates %e', (t) => {
   t.is(printf('%e', 52.8), '5.28e+1');
 });
 
+test('interpolates %E', (t) => {
+  t.is(printf('%E', 52.8), '5.28E+1');
+});
+
 test('interpolates %f', (t) => {
   t.is(printf('%f', 52.8), '52.8');
 });

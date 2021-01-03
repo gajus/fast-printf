@@ -68,6 +68,13 @@ export const printf = (subject: string, ...boundValues: string[] | number[]): st
             notation: 'exponential',
           },
         );
+      } else if (token.conversion === 'E') {
+        result += formatNumber(
+          boundValue,
+          {
+            notation: 'exponential',
+          },
+        ).toUpperCase();
       } else if (token.conversion === 'f') {
         if (token.precision !== null) {
           boundValue = formatNumber(
