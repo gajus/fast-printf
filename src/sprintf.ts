@@ -88,6 +88,14 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
     } else if (conversion === 'o') {
       return (Number.parseInt(boundValue, 10) >>> 0).toString(8);
     } else if (conversion === 's') {
+      if (width !== null) {
+        boundValue = padValue(
+          boundValue,
+          width,
+          flag,
+        );
+      }
+
       return boundValue;
     } else if (conversion === 'u') {
       return Number.parseInt(boundValue, 10) >>> 0;
