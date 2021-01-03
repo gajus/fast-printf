@@ -5,14 +5,17 @@ import {
 export const sprintf = (subject: string, ...boundValues: any[]): string => {
   let index = -1;
 
-  return subject.replaceAll(/(?:%(?<conversion>[%c-fosux]))|(\\%)/g, (match, ...args) => {
+  return subject.replaceAll(/(?:%(?<flag>[+-])?(?<width>\d+)?(?<precision>\.\d+)?(?<conversion>[%c-fosux]))|(\\%)/g, (match, ...args) => {
     if (match === '\\%' || match === '%%') {
       return '%';
     }
 
-    const {
-      conversion,
-    } = args[args.length - 1];
+    const namedGroups = args[args.length - 1];
+
+    const conversion = namedGroups.conversion;
+    const flag = namedGroups.flag;
+    const precision = namedGroups.precision ? Number.parseInt(namedGroups.precision, 10) : null;
+    const width = namedGroups.width ? Number.parseInt(namedGroups.width, 10) : null;
 
     index++;
 
