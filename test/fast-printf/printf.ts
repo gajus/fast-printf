@@ -129,6 +129,10 @@ test('interpolates %s', (t) => {
   t.is(printf('%s', 'foo'), 'foo');
 });
 
+test('interpolates %S', (t) => {
+  t.is(printf('%S', 'foo'), 'FOO');
+});
+
 test('interpolates %5s', (t) => {
   t.is(printf('%5s', 'foo'), '  foo');
 });

@@ -117,6 +117,16 @@ export const printf = (subject: string, ...boundValues: any[]): string => {
         }
 
         result += boundValue;
+      } else if (token.conversion === 'S') {
+        if (token.width !== null) {
+          boundValue = padValue(
+            String(boundValue),
+            token.width,
+            token.flag,
+          );
+        }
+
+        result += String(boundValue).toUpperCase();
       } else if (token.conversion === 'u') {
         result += Number.parseInt(String(boundValue), 10) >>> 0;
       } else if (token.conversion === 'x') {
