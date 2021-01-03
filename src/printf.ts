@@ -47,6 +47,8 @@ export const printf = (subject: string, ...boundValues: string[] | number[]): st
         result += token.placeholder;
       } else if (token.conversion === 'c') {
         result += boundValue;
+      } else if (token.conversion === 'C') {
+        result += String(boundValue).toUpperCase();
       } else if (token.conversion === 'd') {
         boundValue = String(boundValue);
 

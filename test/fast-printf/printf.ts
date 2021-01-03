@@ -8,6 +8,10 @@ test('interpolates %c', (t) => {
   t.is(printf('%c%c', 'a', 'b'), 'ab');
 });
 
+test('interpolates %C', (t) => {
+  t.is(printf('%C', 'a'), 'A');
+});
+
 test('interpolates %d', (t) => {
   t.is(printf('%d', 123), '123');
 });
