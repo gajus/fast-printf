@@ -3,6 +3,20 @@ import {
   printf,
 } from '../../src/printf';
 
+test('interpolates %b', (t) => {
+  t.is(printf('%b', true), 'true');
+  t.is(printf('%b', false), 'false');
+  t.is(printf('%b', 1), 'true');
+  t.is(printf('%b', 0), 'false');
+});
+
+test('interpolates %B', (t) => {
+  t.is(printf('%B', true), 'TRUE');
+  t.is(printf('%B', false), 'FALSE');
+  t.is(printf('%B', 1), 'TRUE');
+  t.is(printf('%B', 0), 'FALSE');
+});
+
 test('interpolates %c', (t) => {
   t.is(printf('%c', 'a'), 'a');
   t.is(printf('%c%c', 'a', 'b'), 'ab');

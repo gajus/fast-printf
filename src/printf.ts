@@ -1,4 +1,7 @@
 import {
+  boolean,
+} from 'boolean';
+import {
   format as formatNumber,
 } from 'mathjs';
 import {
@@ -25,7 +28,8 @@ const padValue = (value: string, width: number, flag: Flag | null): string => {
 
 const cache: Record<string, Token[]> = {};
 
-export const printf = (subject: string, ...boundValues: string[] | number[]): string => {
+// eslint-disable-next-line complexity
+export const printf = (subject: string, ...boundValues: any[]): string => {
   let tokens = cache[subject];
 
   if (!tokens) {
@@ -45,6 +49,10 @@ export const printf = (subject: string, ...boundValues: string[] | number[]): st
 
       if (boundValue === undefined) {
         result += token.placeholder;
+      } else if (token.conversion === 'b') {
+        result += boolean(boundValue) ? 'true' : 'false';
+      } else if (token.conversion === 'B') {
+        result += boolean(boundValue) ? 'TRUE' : 'FALSE';
       } else if (token.conversion === 'c') {
         result += boundValue;
       } else if (token.conversion === 'C') {
