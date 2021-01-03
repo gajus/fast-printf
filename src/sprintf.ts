@@ -2,6 +2,22 @@ import {
   format as formatNumber,
 } from 'mathjs';
 
+type Flag = '+' | '-' | '-+' | '0';
+
+const padValue = (value: string, width: number, flag: Flag): string => {
+  if (flag === '-') {
+    return value.padEnd(width, ' ');
+  } else if (flag === '-+') {
+    return ('+' + value).padEnd(width, ' ');
+  } else if (flag === '+') {
+    return ('+' + value).padStart(width, ' ');
+  } else if (flag === '0') {
+    return value.padStart(width, '0');
+  } else {
+    return value.padStart(width, ' ');
+  }
+};
+
 export const sprintf = (subject: string, ...boundValues: any[]): string => {
   let index = -1;
 
@@ -32,17 +48,11 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
       boundValue = String(boundValue);
 
       if (width !== null) {
-        if (flag === '-') {
-          boundValue = boundValue.padEnd(width, ' ');
-        } else if (flag === '-+') {
-          boundValue = ('+' + boundValue).padEnd(width, ' ');
-        } else if (flag === '+') {
-          boundValue = ('+' + boundValue).padStart(width, ' ');
-        } else if (flag === '0') {
-          boundValue = boundValue.padStart(width, '0');
-        } else {
-          boundValue = boundValue.padStart(width, ' ');
-        }
+        boundValue = padValue(
+          boundValue,
+          width,
+          flag,
+        );
       }
 
       return boundValue;
@@ -61,6 +71,14 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
             notation: 'fixed',
             precision,
           },
+        );
+      }
+
+      if (width !== null) {
+        boundValue = padValue(
+          boundValue,
+          width,
+          flag,
         );
       }
 

@@ -64,6 +64,31 @@ test('interpolates %.1f', (t) => {
   t.is(sprintf('%.1f', 1.25), '1.3');
 });
 
+test('interpolates %5.1f', (t) => {
+  t.is(sprintf('%5.1f', 1.234_5), '  1.2');
+  t.is(sprintf('%5.1f', 1.25), '  1.3');
+});
+
+test('interpolates %+5.1f', (t) => {
+  t.is(sprintf('%+5.1f', 1.234_5), ' +1.2');
+  t.is(sprintf('%+5.1f', 1.25), ' +1.3');
+});
+
+test('interpolates %-+5.1f', (t) => {
+  t.is(sprintf('%-+5.1f', 1.234_5), '+1.2 ');
+  t.is(sprintf('%-+5.1f', 1.25), '+1.3 ');
+});
+
+test('interpolates %-5.1f', (t) => {
+  t.is(sprintf('%-5.1f', 1.234_5), '1.2  ');
+  t.is(sprintf('%-5.1f', 1.25), '1.3  ');
+});
+
+test('interpolates %05.1f', (t) => {
+  t.is(sprintf('%05.1f', 1.234_5), '001.2');
+  t.is(sprintf('%05.1f', 1.25), '001.3');
+});
+
 test('interpolates %i', (t) => {
   t.is(sprintf('%f', 123), '123');
 });
