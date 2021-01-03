@@ -85,8 +85,8 @@ printf('%5f', 123);
 // => '  123'
 
 // %0X.Yf zero-fills
-printf('%5.1f', 1.234);
-// => '  1.2'
+printf('%05.1f', 1.234);
+// => '001.2'
 
 // %-X.Yf left justifies
 printf('%-5.1f', 1.234);
