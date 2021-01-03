@@ -33,6 +33,8 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
       if (width !== null) {
         if (flag === '-') {
           boundValue = boundValue.padEnd(width, ' ');
+        } else if (flag === '+') {
+          boundValue = ('+' + boundValue).padStart(width, ' ');
         } else if (flag === '0') {
           boundValue = boundValue.padStart(width, '0');
         } else {
