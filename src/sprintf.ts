@@ -1,10 +1,14 @@
 import {
   format as formatNumber,
 } from 'mathjs';
+import {
+  tokenize,
+} from './tokenize';
+import {
+  Flag,
+} from './types';
 
-type Flag = '+' | '-' | '-+' | '0';
-
-const padValue = (value: string, width: number, flag: Flag): string => {
+const padValue = (value: string, width: number, flag: Flag | null): string => {
   if (flag === '-') {
     return value.padEnd(width, ' ');
   } else if (flag === '-+') {
@@ -18,95 +22,86 @@ const padValue = (value: string, width: number, flag: Flag): string => {
   }
 };
 
-export const sprintf = (subject: string, ...boundValues: any[]): string => {
+export const sprintf = (subject: string, ...boundValues: string[] | number[]): string => {
+  const tokens = tokenize(subject);
+
   let index = -1;
+  let result = '';
 
-  // eslint-disable-next-line complexity
-  return subject.replaceAll(/(?:%(?<flag>([+0-]|-\+))?(?<width>\d+)?(?<precision>\.\d+)?(?<conversion>[%c-fosux]))|(\\%)/g, (match, ...args) => {
-    if (match === '\\%' || match === '%%') {
-      return '%';
-    }
+  for (const token of tokens) {
+    if (token.type === 'literal') {
+      result += token.literal;
+    } else {
+      index++;
 
-    const namedGroups = args[args.length - 1];
+      let boundValue = boundValues[index];
 
-    const conversion = namedGroups.conversion;
-    const flag = namedGroups.flag || null;
-    const precision = namedGroups.precision ? Number.parseInt(namedGroups.precision.slice(1), 10) : null;
-    const width = namedGroups.width ? Number.parseInt(namedGroups.width, 10) : null;
+      if (boundValue === undefined) {
+        result += token.placeholder;
+      } else if (token.conversion === 'c') {
+        result += boundValue;
+      } else if (token.conversion === 'd') {
+        boundValue = String(boundValue);
 
-    index++;
+        if (token.width !== null) {
+          boundValue = padValue(
+            boundValue,
+            token.width,
+            token.flag,
+          );
+        }
 
-    let boundValue = boundValues[index];
-
-    if (boundValue === undefined) {
-      return match;
-    }
-
-    if (conversion === 'c') {
-      if (boundValue.length !== 1) {
-        throw new Error('%c must be bound to a single character');
-      }
-
-      return boundValue;
-    } else if (conversion === 'd') {
-      boundValue = String(boundValue);
-
-      if (width !== null) {
-        boundValue = padValue(
-          boundValue,
-          width,
-          flag,
-        );
-      }
-
-      return boundValue;
-    } else if (conversion === 'e') {
-      return formatNumber(
-        boundValue,
-        {
-          notation: 'exponential',
-        },
-      );
-    } else if (conversion === 'f') {
-      if (precision !== null) {
-        boundValue = formatNumber(
+        result += boundValue;
+      } else if (token.conversion === 'e') {
+        result += formatNumber(
           boundValue,
           {
-            notation: 'fixed',
-            precision,
+            notation: 'exponential',
           },
         );
-      }
+      } else if (token.conversion === 'f') {
+        if (token.precision !== null) {
+          boundValue = formatNumber(
+            boundValue,
+            {
+              notation: 'fixed',
+              precision: token.precision,
+            },
+          );
+        }
 
-      if (width !== null) {
-        boundValue = padValue(
-          boundValue,
-          width,
-          flag,
-        );
-      }
+        if (token.width !== null) {
+          boundValue = padValue(
+            String(boundValue),
+            token.width,
+            token.flag,
+          );
+        }
 
-      return boundValue;
-    } else if (conversion === 'i') {
-      return boundValue;
-    } else if (conversion === 'o') {
-      return (Number.parseInt(boundValue, 10) >>> 0).toString(8);
-    } else if (conversion === 's') {
-      if (width !== null) {
-        boundValue = padValue(
-          boundValue,
-          width,
-          flag,
-        );
-      }
+        result += boundValue;
+      } else if (token.conversion === 'i') {
+        result += boundValue;
+      } else if (token.conversion === 'o') {
+        result += (Number.parseInt(String(boundValue), 10) >>> 0).toString(8);
+      } else if (token.conversion === 's') {
+        if (token.width !== null) {
+          boundValue = padValue(
+            String(boundValue),
+            token.width,
+            token.flag,
+          );
+        }
 
-      return boundValue;
-    } else if (conversion === 'u') {
-      return Number.parseInt(boundValue, 10) >>> 0;
-    } else if (conversion === 'x') {
-      return (Number.parseInt(boundValue, 10) >>> 0).toString(16);
-    } else {
-      throw new Error('Unknown format specifier.');
+        result += boundValue;
+      } else if (token.conversion === 'u') {
+        result += Number.parseInt(String(boundValue), 10) >>> 0;
+      } else if (token.conversion === 'x') {
+        result += (Number.parseInt(String(boundValue), 10) >>> 0).toString(16);
+      } else {
+        throw new Error('Unknown format specifier.');
+      }
     }
-  });
+  }
+
+  return result;
 };
