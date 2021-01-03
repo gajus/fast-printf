@@ -19,7 +19,7 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
 
     index++;
 
-    const boundValue = boundValues[index];
+    let boundValue = boundValues[index];
 
     if (conversion === 'c') {
       if (boundValue.length !== 1) {
@@ -28,6 +28,12 @@ export const sprintf = (subject: string, ...boundValues: any[]): string => {
 
       return boundValue;
     } else if (conversion === 'd') {
+      boundValue = String(boundValue);
+
+      if (width !== null) {
+        boundValue = boundValue.padStart(width, ' ');
+      }
+
       return boundValue;
     } else if (conversion === 'e') {
       return formatNumber(

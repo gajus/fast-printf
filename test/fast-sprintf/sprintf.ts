@@ -26,6 +26,11 @@ test('interpolates %d', (t) => {
   t.is(sprintf('%d', 123), '123');
 });
 
+test('interpolates %3d', (t) => {
+  t.is(sprintf('%3d', 1), '  1');
+  t.is(sprintf('%3d', 1_234), '1234');
+});
+
 test('interpolates %e', (t) => {
   t.is(sprintf('%e', 52.8), '5.28e+1');
 });
