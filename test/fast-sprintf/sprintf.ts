@@ -36,9 +36,19 @@ test('interpolates %+3d', (t) => {
   t.is(sprintf('%+3d', 1_234), '+1234');
 });
 
+test('interpolates %+3d (negative number)', (t) => {
+  t.is(sprintf('%+3d', -1), ' -1');
+  t.is(sprintf('%+3d', -1_234), '-1234');
+});
+
 test('interpolates %-+3d', (t) => {
   t.is(sprintf('%-+3d', 1), '+1 ');
   t.is(sprintf('%-+3d', 1_234), '+1234');
+});
+
+test('interpolates %-+3d (negative number)', (t) => {
+  t.is(sprintf('%-+3d', -1), '-1 ');
+  t.is(sprintf('%-+3d', -1_234), '-1234');
 });
 
 test('interpolates %-3d', (t) => {
@@ -74,9 +84,19 @@ test('interpolates %+5.1f', (t) => {
   t.is(sprintf('%+5.1f', 1.25), ' +1.3');
 });
 
+test('interpolates %+5.1f (negative number)', (t) => {
+  t.is(sprintf('%+5.1f', -1.234_5), ' -1.2');
+  t.is(sprintf('%+5.1f', -1.25), ' -1.3');
+});
+
 test('interpolates %-+5.1f', (t) => {
   t.is(sprintf('%-+5.1f', 1.234_5), '+1.2 ');
   t.is(sprintf('%-+5.1f', 1.25), '+1.3 ');
+});
+
+test('interpolates %-+5.1f (negative number)', (t) => {
+  t.is(sprintf('%-+5.1f', -1.234_5), '-1.2 ');
+  t.is(sprintf('%-+5.1f', -1.25), '-1.3 ');
 });
 
 test('interpolates %-5.1f', (t) => {

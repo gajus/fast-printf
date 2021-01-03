@@ -8,9 +8,9 @@ const padValue = (value: string, width: number, flag: Flag): string => {
   if (flag === '-') {
     return value.padEnd(width, ' ');
   } else if (flag === '-+') {
-    return ('+' + value).padEnd(width, ' ');
+    return ((Number(value) >= 0 ? '+' : '') + value).padEnd(width, ' ');
   } else if (flag === '+') {
-    return ('+' + value).padStart(width, ' ');
+    return ((Number(value) >= 0 ? '+' : '') + value).padStart(width, ' ');
   } else if (flag === '0') {
     return value.padStart(width, '0');
   } else {
