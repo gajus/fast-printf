@@ -2,7 +2,7 @@ import type {
   Token,
 } from './types';
 
-const TokenRule = /(?:%(?<flag>([+0-]|-\+))?(?<width>\d+)?(?<precision>\.\d+)?(?<position>\d+\$)?(?<conversion>[%BCESb-fosux]))|(\\%)/g;
+const TokenRule = /(?:%(?<flag>([+0-]|-\+))?(?<width>\d+)?(?<position>\d+\$)?(?<precision>\.\d+)?(?<conversion>[%BCESb-fosux]))|(\\%)/g;
 
 export const tokenize = (subject: string): Token[] => {
   let matchResult;

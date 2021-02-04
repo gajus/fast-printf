@@ -186,3 +186,7 @@ test('does not interpolate unbound placeholders', (t) => {
 test('%2$s %1$s', (t) => {
   t.is(printf('%2$s %1$s', 'bar', 'foo'), 'foo bar');
 });
+
+test('%1$.2f', (t) => {
+  t.is(printf('%1$.2f', 123.456), '123.46');
+});
