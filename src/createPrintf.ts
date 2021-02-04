@@ -4,6 +4,7 @@ import {
 import {
   format as formatNumber,
 } from 'mathjs';
+import Roarr from 'roarr';
 import {
   tokenize,
 } from './tokenize';
@@ -11,6 +12,10 @@ import {
   Token,
   Flag,
 } from './types';
+
+const log = Roarr.child({
+  package: 'fast-printf',
+});
 
 export const createPrintf = () => {
   const padValue = (value: string, width: number, flag: Flag | null): string => {
@@ -46,6 +51,11 @@ export const createPrintf = () => {
         let boundValue = boundValues[token.position];
 
         if (boundValue === undefined) {
+          log.warn({
+            boundValues,
+            position: token.position,
+            subject,
+          }, 'referenced unbound value');
           result += token.placeholder;
         } else if (token.conversion === 'b') {
           result += boolean(boundValue) ? 'true' : 'false';
