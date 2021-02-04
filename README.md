@@ -150,4 +150,8 @@ printf('%%');
 printf('\\%');
 // => '%'
 
+// %2$s %1$s positional arguments
+printf('%2$s %1$s', 'bar', 'foo');
+// => 'foo bar'
+
 ```

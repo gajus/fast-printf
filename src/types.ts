@@ -11,6 +11,7 @@ type PlaceholderToken = {
   conversion: string,
   flag: Flag | null,
   placeholder: string,
+  position: number,
   precision: number | null,
   type: 'placeholder',
   width: number | null,

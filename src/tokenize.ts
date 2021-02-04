@@ -2,12 +2,14 @@ import type {
   Token,
 } from './types';
 
-const TokenRule = /(?:%(?<flag>([+0-]|-\+))?(?<width>\d+)?(?<precision>\.\d+)?(?<conversion>[%BCESb-fosux]))|(\\%)/g;
+const TokenRule = /(?:%(?<flag>([+0-]|-\+))?(?<width>\d+)?(?<precision>\.\d+)?(?<position>\d+\$)?(?<conversion>[%BCESb-fosux]))|(\\%)/g;
 
 export const tokenize = (subject: string): Token[] => {
   let matchResult;
 
   const tokens: Token[] = [];
+
+  let argumentIndex = 0;
 
   let lastIndex = 0;
 
@@ -43,6 +45,7 @@ export const tokenize = (subject: string): Token[] => {
         conversion: matchResult.groups.conversion,
         flag: matchResult.groups.flag as any || null,
         placeholder: match,
+        position: matchResult.groups.position ? Number.parseInt(matchResult.groups.position, 10) - 1 : argumentIndex++,
         precision: matchResult.groups.precision ? Number.parseInt(matchResult.groups.precision.slice(1), 10) : null,
         type: 'placeholder',
         width: matchResult.groups.width ? Number.parseInt(matchResult.groups.width, 10) : null,

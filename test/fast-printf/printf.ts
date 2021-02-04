@@ -182,3 +182,7 @@ test('\\% does not advance value cursor', (t) => {
 test('does not interpolate unbound placeholders', (t) => {
   t.is(printf('%s %s %s %s', 'foo'), 'foo %s %s %s');
 });
+
+test('%2$s %1$s', (t) => {
+  t.is(printf('%2$s %1$s', 'bar', 'foo'), 'foo bar');
+});

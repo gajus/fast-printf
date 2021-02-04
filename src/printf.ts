@@ -36,16 +36,13 @@ export const printf = (subject: string, ...boundValues: any[]): string => {
     tokens = cache[subject] = tokenize(subject);
   }
 
-  let index = -1;
   let result = '';
 
   for (const token of tokens) {
     if (token.type === 'literal') {
       result += token.literal;
     } else {
-      index++;
-
-      let boundValue = boundValues[index];
+      let boundValue = boundValues[token.position];
 
       if (boundValue === undefined) {
         result += token.placeholder;
