@@ -30,6 +30,10 @@ test('interpolates %d', (t) => {
   t.is(printf('%d', 123), '123');
 });
 
+test('interpolates %d (removes fractional digits)', (t) => {
+  t.is(printf('%d', 123.567), '123');
+});
+
 test('interpolates %3d', (t) => {
   t.is(printf('%3d', 1), '  1');
   t.is(printf('%3d', 1_234), '1234');

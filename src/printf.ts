@@ -58,7 +58,7 @@ export const printf = (subject: string, ...boundValues: any[]): string => {
       } else if (token.conversion === 'C') {
         result += String(boundValue).toUpperCase();
       } else if (token.conversion === 'd') {
-        boundValue = String(boundValue);
+        boundValue = String(Math.trunc(boundValue));
 
         if (token.width !== null) {
           boundValue = padValue(
