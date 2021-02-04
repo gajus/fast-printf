@@ -151,6 +151,10 @@ test('interpolates %x', (t) => {
   t.is(printf('%x', 255), 'ff');
 });
 
+test('interpolates %5x', (t) => {
+  t.is(printf('%5x', 255), '   ff');
+});
+
 test('%% prints %', (t) => {
   t.is(printf('%%'), '%');
 });

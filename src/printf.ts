@@ -130,7 +130,17 @@ export const printf = (subject: string, ...boundValues: any[]): string => {
       } else if (token.conversion === 'u') {
         result += Number.parseInt(String(boundValue), 10) >>> 0;
       } else if (token.conversion === 'x') {
-        result += (Number.parseInt(String(boundValue), 10) >>> 0).toString(16);
+        boundValue = (Number.parseInt(String(boundValue), 10) >>> 0).toString(16);
+
+        if (token.width !== null) {
+          boundValue = padValue(
+            String(boundValue),
+            token.width,
+            token.flag,
+          );
+        }
+
+        result += boundValue;
       } else {
         throw new Error('Unknown format specifier.');
       }
