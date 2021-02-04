@@ -8,6 +8,11 @@
 
 [Fast](#benchmark) and spec-compliant `printf` implementation for Node.js and browser.
 
+* [Usage](#usage)
+* [Handling Unbound Value References](#handling-unbound-value-references)
+* [Benchmark](#benchmark)
+* [Printf Cheatsheet](#printf-cheatsheet)
+
 ## Usage
 
 ```ts
