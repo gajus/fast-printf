@@ -7,7 +7,7 @@ type LiteralToken = {
   literal: string,
 };
 
-type PlaceholderToken = {
+export type PlaceholderToken = {
   conversion: string,
   flag: Flag | null,
   placeholder: string,

@@ -10,6 +10,7 @@ import {
 } from './tokenize';
 import {
   Token,
+  PlaceholderToken,
   Flag,
 } from './types';
 
@@ -17,7 +18,31 @@ const log = Roarr.child({
   package: 'fast-printf',
 });
 
-export const createPrintf = () => {
+type FormatUnboundExpression = (
+  subject: string,
+  token: PlaceholderToken,
+  boundValues: any[],
+) => string;
+
+const formatDefaultUnboundExpression = (
+  subject: string,
+  token: PlaceholderToken,
+  boundValues: any[],
+): string => {
+  log.warn({
+    boundValues,
+    position: token.position,
+    subject,
+  }, 'referenced unbound value');
+
+  return token.placeholder;
+};
+
+type Configuration = {
+  formatUnboundExpression: FormatUnboundExpression,
+};
+
+export const createPrintf = (configuration?: Configuration) => {
   const padValue = (value: string, width: number, flag: Flag | null): string => {
     if (flag === '-') {
       return value.padEnd(width, ' ');
@@ -31,6 +56,8 @@ export const createPrintf = () => {
       return value.padStart(width, ' ');
     }
   };
+
+  const formatUnboundExpression = configuration?.formatUnboundExpression ?? formatDefaultUnboundExpression;
 
   const cache: Record<string, Token[]> = {};
 
@@ -51,12 +78,11 @@ export const createPrintf = () => {
         let boundValue = boundValues[token.position];
 
         if (boundValue === undefined) {
-          log.warn({
-            boundValues,
-            position: token.position,
+          result += formatUnboundExpression(
             subject,
-          }, 'referenced unbound value');
-          result += token.placeholder;
+            token,
+            boundValues,
+          );
         } else if (token.conversion === 'b') {
           result += boolean(boundValue) ? 'true' : 'false';
         } else if (token.conversion === 'B') {

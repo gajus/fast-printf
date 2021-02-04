@@ -19,6 +19,42 @@ console.log(printf('foo %s', 'bar'));
 
 ```
 
+## Handling Unbound Value References
+
+By default, interpolating an unbound expression produces:
+
+* The expression is left in place
+* A warning is logged using [roarr](https://github.com/gajus/roarr)
+
+i.e. `printf('%s bar')` produces `%s bar`.
+
+This behavior can be overridden by configuring a `fast-printf` instance using `createPrintf`:
+
+```ts
+import {
+  createPrintf,
+} from 'fast-printf';
+
+const printf = createPrintf({
+  formatUnboundExpression: (
+    subject: string,
+    token: PlaceholderToken,
+    boundValues: any[],
+  ): string => {
+    console.warn({
+      boundValues,
+      position: token.position,
+      subject,
+    }, 'referenced unbound value');
+
+    return token.placeholder;
+  };
+});
+
+console.log(printf('foo %s', 'bar'));
+
+```
+
 ## Benchmark
 
 |**implementation**|**without_placeholders**|**with_string_placeholder**|**with_many_string_placeholders**|
