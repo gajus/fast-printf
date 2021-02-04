@@ -13,9 +13,32 @@ test('tokenizes a string without placeholders', (t) => {
 });
 
 test('tokenizes a string with placeholders (%%)', (t) => {
+  t.deepEqual(tokenize('%%'), [
+    {
+      literal: '%',
+      type: 'literal',
+    },
+  ]);
+
   t.deepEqual(tokenize('foo %% bar'), [
     {
       literal: 'foo % bar',
+      type: 'literal',
+    },
+  ]);
+});
+
+test('tokenizes a string with placeholders (%%s)', (t) => {
+  t.deepEqual(tokenize('%%s'), [
+    {
+      literal: '%s',
+      type: 'literal',
+    },
+  ]);
+
+  t.deepEqual(tokenize('foo %%s bar'), [
+    {
+      literal: 'foo %s bar',
       type: 'literal',
     },
   ]);

@@ -163,6 +163,10 @@ test('%% prints %', (t) => {
   t.is(printf('%%'), '%');
 });
 
+test('%%s prints %s', (t) => {
+  t.is(printf('%%s'), '%s');
+});
+
 test('%% does not advance value cursor', (t) => {
   t.is(printf('%% %s', 'foo'), '% foo');
 });

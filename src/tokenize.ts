@@ -52,7 +52,7 @@ export const tokenize = (subject: string): Token[] => {
     }
   }
 
-  if (lastIndex < subject.length - 1) {
+  if (lastIndex <= subject.length - 1) {
     if (lastToken && lastToken.type === 'literal') {
       lastToken.literal += subject.slice(lastIndex);
     } else {
