@@ -29,7 +29,7 @@
     "del-cli": "^3.0.1",
     "eslint": "^7.19.0",
     "eslint-config-canonical": "^25.8.15",
-    "husky": "^5.0.9",
+    "husky": "^4",
     "nyc": "^15.1.0",
     "semantic-release": "^17.3.8",
     "ts-node": "^9.1.1",
@@ -37,6 +37,11 @@
   },
   "engines": {
     "node": ">=10.0"
+  },
+  "husky": {
+    "scripts": {
+      "pre-commit": "npm run lint && npm run test && npm run build"
+    }
   },
   "keywords": [
     "printf",
@@ -54,7 +59,6 @@
     "build": "del-cli ./dist && tsc",
     "dev": "tsc --watch",
     "lint": "eslint ./src ./test && tsc --noEmit",
-    "postinstall": "husky install",
     "test": "NODE_ENV=test ava --serial --verbose"
   },
   "typings": "./dist/printf.d.ts",
