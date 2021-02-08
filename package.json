@@ -17,8 +17,7 @@
   },
   "dependencies": {
     "boolean": "^3.0.2",
-    "mathjs": "^9.2.0",
-    "roarr": "^4.0.6"
+    "mathjs": "^9.2.0"
   },
   "description": "Fast and spec-compliant printf implementation for Node.js and browser.",
   "devDependencies": {
@@ -62,6 +61,6 @@
     "lint": "eslint ./src ./test && tsc --noEmit",
     "test": "NODE_ENV=test ava --serial --verbose"
   },
-  "typings": "./dist/printf.d.ts",
+  "typings": "./dist/src/printf.d.ts",
   "version": "1.0.0"
 }
