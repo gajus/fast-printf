@@ -1,6 +1,4 @@
-/* eslint-disable import/exports-last */
-
-export type Flag = '+' | '-' | '-+' | '0';
+export type Flag = '-' | '-+' | '+' | '0';
 
 type LiteralToken = {
   type: 'literal',

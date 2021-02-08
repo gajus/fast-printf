@@ -8,7 +8,7 @@ import Roarr from 'roarr';
 import {
   tokenize,
 } from './tokenize';
-import {
+import type {
   Token,
   PlaceholderToken,
   Flag,
@@ -42,7 +42,9 @@ type Configuration = {
   formatUnboundExpression: FormatUnboundExpression,
 };
 
-export const createPrintf = (configuration?: Configuration) => {
+type Printf = (subject: string, ...boundValues: any[]) => string;
+
+export const createPrintf = (configuration?: Configuration): Printf => {
   const padValue = (value: string, width: number, flag: Flag | null): string => {
     if (flag === '-') {
       return value.padEnd(width, ' ');
@@ -62,7 +64,7 @@ export const createPrintf = (configuration?: Configuration) => {
   const cache: Record<string, Token[]> = {};
 
   // eslint-disable-next-line complexity
-  return (subject: string, ...boundValues: any[]): string => {
+  return (subject, ...boundValues) => {
     let tokens = cache[subject];
 
     if (!tokens) {
