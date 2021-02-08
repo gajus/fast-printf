@@ -4,7 +4,6 @@ import {
 import {
   format as formatNumber,
 } from 'mathjs';
-import Roarr from 'roarr';
 import {
   tokenize,
 } from './tokenize';
@@ -13,10 +12,6 @@ import type {
   PlaceholderToken,
   Flag,
 } from './types';
-
-const log = Roarr.child({
-  package: 'fast-printf',
-});
 
 type FormatUnboundExpression = (
   subject: string,
@@ -29,7 +24,8 @@ const formatDefaultUnboundExpression = (
   token: PlaceholderToken,
   boundValues: any[],
 ): string => {
-  log.warn({
+  // eslint-disable-next-line no-console
+  console.warn({
     boundValues,
     position: token.position,
     subject,

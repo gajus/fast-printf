@@ -17,8 +17,7 @@
   },
   "dependencies": {
     "boolean": "^3.0.2",
-    "mathjs": "^9.2.0",
-    "roarr": "^4.0.3"
+    "mathjs": "^9.2.0"
   },
   "description": "Fast and spec-compliant printf implementation for Node.js and browser.",
   "devDependencies": {
