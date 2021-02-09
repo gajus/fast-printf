@@ -20,6 +20,7 @@ type FormatUnboundExpression = (
 ) => string;
 
 const formatDefaultUnboundExpression = (
+  // @ts-expect-error unused parameter
   subject: string,
   token: PlaceholderToken,
 ): string => {
