@@ -4,7 +4,6 @@ import {
 import {
   format as formatNumber,
 } from 'mathjs';
-import Roarr from 'roarr';
 import {
   tokenize,
 } from './tokenize';
@@ -13,10 +12,6 @@ import type {
   PlaceholderToken,
   Flag,
 } from './types';
-
-const log = Roarr.child({
-  package: 'fast-printf',
-});
 
 type FormatUnboundExpression = (
   subject: string,
@@ -27,14 +22,7 @@ type FormatUnboundExpression = (
 const formatDefaultUnboundExpression = (
   subject: string,
   token: PlaceholderToken,
-  boundValues: any[],
 ): string => {
-  log.warn({
-    boundValues,
-    position: token.position,
-    subject,
-  }, 'referenced unbound value');
-
   return token.placeholder;
 };
 
