@@ -48,7 +48,8 @@
     "sprintf"
   ],
   "license": "BSD-3-Clause",
-  "main": "./dist/src/printf.js",
+  "main": "./dist/cjs/src/printf.js",
+  "module": "./dist/esm/src/printf.js",
   "name": "fast-printf",
   "repository": {
     "type": "git",
@@ -56,11 +57,11 @@
   },
   "scripts": {
     "benchmark": "ROARR_LOG=true ts-node --transpile-only test/benchmark.ts",
-    "build": "del-cli ./dist && tsc",
+    "build": "del-cli ./dist && tsc && tsc -p tsconfig-cjs.json",
     "dev": "tsc --watch",
     "lint": "eslint ./src ./test && tsc --noEmit",
     "test": "NODE_ENV=test ava --serial --verbose"
   },
-  "typings": "./dist/src/printf.d.ts",
+  "typings": "./dist/esm/src/printf.d.ts",
   "version": "1.0.0"
 }
