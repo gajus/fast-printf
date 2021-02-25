@@ -1,10 +1,14 @@
+/* eslint-disable import/no-unresolved */
+
 import {
   boolean,
 } from 'boolean';
 import {
   create,
   formatDependencies,
-} from 'mathjs';
+
+// @ts-expect-error @types/mathjs are not in sync mathjs
+} from 'mathjs/number';
 import {
   tokenize,
 } from './tokenize';
