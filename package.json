@@ -40,7 +40,7 @@
   },
   "exports": {
     ".": {
-      "default": "./dist/esm/src/printf.js",
+      "import": "./dist/esm/src/printf.js",
       "require": "./dist/cjs/src/printf.js"
     }
   },
