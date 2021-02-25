@@ -57,7 +57,7 @@
   },
   "scripts": {
     "benchmark": "ROARR_LOG=true ts-node --transpile-only test/benchmark.ts",
-    "build": "del-cli ./dist && tsc && tsc -p tsconfig-cjs.json",
+    "build": "del-cli ./dist && tsc && tsc -p tsconfig-esm.json",
     "dev": "tsc --watch",
     "lint": "eslint ./src ./test && tsc --noEmit",
     "test": "NODE_ENV=test ava --serial --verbose"
