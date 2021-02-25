@@ -38,6 +38,12 @@
   "engines": {
     "node": ">=10.0"
   },
+  "exports": {
+    ".": {
+      "default": "./dist/esm/src/printf.js",
+      "require": "./dist/cjs/src/printf.js"
+    }
+  },
   "husky": {
     "scripts": {
       "pre-commit": "npm run lint && npm run test && npm run build"
@@ -49,7 +55,6 @@
   ],
   "license": "BSD-3-Clause",
   "main": "./dist/cjs/src/printf.js",
-  "module": "./dist/esm/src/printf.js",
   "name": "fast-printf",
   "repository": {
     "type": "git",
