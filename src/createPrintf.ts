@@ -2,7 +2,8 @@ import {
   boolean,
 } from 'boolean';
 import {
-  format as formatNumber,
+  create,
+  formatDependencies,
 } from 'mathjs';
 import {
   tokenize,
@@ -18,6 +19,12 @@ type FormatUnboundExpression = (
   token: PlaceholderToken,
   boundValues: any[],
 ) => string;
+
+const {
+  format: formatNumber,
+} = create({
+  formatDependencies,
+});
 
 const formatDefaultUnboundExpression = (
   // @ts-expect-error unused parameter
