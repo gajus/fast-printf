@@ -26,6 +26,10 @@ const {
   formatDependencies,
 });
 
+if (!formatNumber) {
+  throw new Error('formatNumber must be defined');
+}
+
 const formatDefaultUnboundExpression = (
   // @ts-expect-error unused parameter
   subject: string,
