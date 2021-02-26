@@ -6,5 +6,9 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "root": true
+  "root": true,
+  "rules": {
+    "import/extensions": 0,
+    "import/no-unresolved": 0
+  }
 }
