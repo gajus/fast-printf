@@ -7,12 +7,12 @@ import {
 } from 'mathjs';
 import {
   tokenize,
-} from './tokenize.js';
+} from './tokenize';
 import type {
   Token,
   PlaceholderToken,
   Flag,
-} from './types.js';
+} from './types';
 
 type FormatUnboundExpression = (
   subject: string,

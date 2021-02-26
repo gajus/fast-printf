@@ -1,6 +1,6 @@
 import {
   createPrintf,
-} from './createPrintf.js';
+} from './createPrintf';
 
 export {
   createPrintf,

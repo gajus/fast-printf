@@ -1,7 +1,7 @@
 import test from 'ava';
 import {
   tokenize,
-} from '../../src/tokenize.js';
+} from '../../src/tokenize';
 
 test('tokenizes a string without placeholders', (t) => {
   t.deepEqual(tokenize('foo bar'), [

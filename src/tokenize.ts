@@ -1,6 +1,6 @@
 import type {
   Token,
-} from './types.js';
+} from './types';
 
 const TokenRule = /(?:%(?<flag>([+0-]|-\+))?(?<width>\d+)?(?<position>\d+\$)?(?<precision>\.\d+)?(?<conversion>[%BCESb-fosux]))|(\\%)/g;
 

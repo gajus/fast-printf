@@ -1,7 +1,7 @@
 import test from 'ava';
 import {
   printf,
-} from '../../src/printf.js';
+} from '../../src/printf';
 
 test('interpolates %b', (t) => {
   t.is(printf('%b', true), 'true');
