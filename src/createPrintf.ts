@@ -2,10 +2,6 @@ import {
   boolean,
 } from 'boolean';
 import {
-  create,
-  formatDependencies,
-} from 'mathjs';
-import {
   tokenize,
 } from './tokenize';
 import type {
@@ -19,16 +15,6 @@ type FormatUnboundExpression = (
   token: PlaceholderToken,
   boundValues: any[],
 ) => string;
-
-const {
-  format: formatNumber,
-} = create({
-  formatDependencies,
-});
-
-if (!formatNumber) {
-  throw new Error('formatNumber must be defined');
-}
 
 const formatDefaultUnboundExpression = (
   // @ts-expect-error unused parameter
@@ -106,28 +92,19 @@ export const createPrintf = (configuration?: Configuration): Printf => {
 
           result += boundValue;
         } else if (token.conversion === 'e') {
-          result += formatNumber(
+          result += Number(
             boundValue,
-            {
-              notation: 'exponential',
-            },
-          );
+          )
+            .toExponential();
         } else if (token.conversion === 'E') {
-          result += formatNumber(
+          result += Number(
             boundValue,
-            {
-              notation: 'exponential',
-            },
-          ).toUpperCase();
+          )
+            .toExponential()
+            .toUpperCase();
         } else if (token.conversion === 'f') {
           if (token.precision !== null) {
-            boundValue = formatNumber(
-              boundValue,
-              {
-                notation: 'fixed',
-                precision: token.precision,
-              },
-            );
+            boundValue = Number(boundValue).toFixed(token.precision);
           }
 
           if (token.width !== null) {
