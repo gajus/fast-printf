@@ -37,12 +37,6 @@
   "engines": {
     "node": ">=10.0"
   },
-  "exports": {
-    ".": {
-      "import": "./dist/esm/src/printf.js",
-      "require": "./dist/cjs/src/printf.js"
-    }
-  },
   "husky": {
     "scripts": {
       "pre-commit": "npm run lint && npm run test && npm run build"
@@ -53,7 +47,7 @@
     "sprintf"
   ],
   "license": "BSD-3-Clause",
-  "main": "./dist/cjs/src/printf.js",
+  "main": "./dist/src/printf.js",
   "name": "fast-printf",
   "repository": {
     "type": "git",
@@ -61,7 +55,7 @@
   },
   "scripts": {
     "benchmark": "ROARR_LOG=true ts-node --transpile-only test/benchmark.ts",
-    "build": "del-cli ./dist && tsc && tsc -p tsconfig-esm.json && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json && echo '{\"type\": \"module\"}' > dist/esm/package.json",
+    "build": "del-cli ./dist && tsc",
     "dev": "tsc --watch",
     "lint": "eslint ./src ./test && tsc --noEmit",
     "test": "NODE_ENV=test ava --serial --verbose"
