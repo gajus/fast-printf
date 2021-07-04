@@ -26,6 +26,14 @@ test('interpolates %C', (t) => {
   t.is(printf('%C', 'a'), 'A');
 });
 
+test('interpolates %i', (t) => {
+  t.is(printf('%i', 123), '123');
+});
+
+test('interpolates %i (removes fractional digits)', (t) => {
+  t.is(printf('%i', 123.567), '123');
+});
+
 test('interpolates %d', (t) => {
   t.is(printf('%d', 123), '123');
 });
@@ -119,10 +127,6 @@ test('interpolates %-5.1f', (t) => {
 test('interpolates %05.1f', (t) => {
   t.is(printf('%05.1f', 1.234_5), '001.2');
   t.is(printf('%05.1f', 1.25), '001.3');
-});
-
-test('interpolates %i', (t) => {
-  t.is(printf('%f', 123), '123');
 });
 
 test('interpolates %o', (t) => {

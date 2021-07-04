@@ -79,7 +79,7 @@ export const createPrintf = (configuration?: Configuration): Printf => {
           result += boundValue;
         } else if (token.conversion === 'C') {
           result += String(boundValue).toUpperCase();
-        } else if (token.conversion === 'd') {
+        } else if (token.conversion === 'i' || token.conversion === 'd') {
           boundValue = String(Math.trunc(boundValue));
 
           if (token.width !== null) {
@@ -115,8 +115,6 @@ export const createPrintf = (configuration?: Configuration): Printf => {
             );
           }
 
-          result += boundValue;
-        } else if (token.conversion === 'i') {
           result += boundValue;
         } else if (token.conversion === 'o') {
           result += (Number.parseInt(String(boundValue), 10) >>> 0).toString(8);
