@@ -15,9 +15,7 @@
       "ts-node/register/transpile-only"
     ]
   },
-  "dependencies": {
-    "boolean": "^3.1.4"
-  },
+  "dependencies": {},
   "description": "Fast and spec-compliant printf implementation for Node.js and browser.",
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",

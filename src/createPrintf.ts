@@ -1,6 +1,6 @@
 import {
   boolean,
-} from 'boolean';
+} from './boolean';
 import {
   tokenize,
 } from './tokenize';
