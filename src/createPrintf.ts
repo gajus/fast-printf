@@ -13,12 +13,12 @@ import type {
 type FormatUnboundExpression = (
   subject: string,
   token: PlaceholderToken,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- intentional per @gajus
   boundValues: any[],
 ) => string;
 
 const formatDefaultUnboundExpression = (
-  // @ts-expect-error unused parameter
-  subject: string,
+  _subject: string,
   token: PlaceholderToken,
 ): string => {
   return token.placeholder;
@@ -31,6 +31,7 @@ type Configuration = {
 type Printf = (subject: string, ...boundValues: any[]) => string;
 
 export const createPrintf = (configuration?: Configuration): Printf => {
+  // eslint-disable-next-line unicorn/consistent-function-scoping -- intentional per @gajus
   const padValue = (value: string, width: number, flag: Flag | null): string => {
     if (flag === '-') {
       return value.padEnd(width, ' ');

@@ -43,6 +43,7 @@ export const tokenize = (subject: string): Token[] => {
     } else if (matchResult.groups) {
       lastToken = {
         conversion: matchResult.groups.conversion,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- intentional per @gajus
         flag: matchResult.groups.flag as any || null,
         placeholder: match,
         position: matchResult.groups.position ? Number.parseInt(matchResult.groups.position, 10) - 1 : argumentIndex++,
