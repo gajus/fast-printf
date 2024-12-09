@@ -58,5 +58,5 @@
     "test": "NODE_ENV=test ava --serial --verbose"
   },
   "typings": "./dist/src/printf.d.ts",
-  "version": "1.0.1"
+  "version": "1.6.10"
 }
